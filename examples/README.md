@@ -2,13 +2,16 @@
 
 The `ballerinax/interzoid.globalnumberinfo` connector provides practical examples illustrating usage in various scenarios.
 
-[//]: # (TODO: Add examples)
-1. 
-2. 
+1. [Phone number geolocation](./phone_number_geolocation/phone_number_geolocation.md) - Look up the city, country and primary language of a telephone number.
+2. [Mobile number screening](./mobile_number_screening/mobile_number_screening.md) - Screen a list of numbers and report which ones are mobile.
 
 ## Prerequisites
 
-[//]: # (TODO: Add prerequisites)
+Create a `Config.toml` in the example directory with your Interzoid license key as described in the example's documentation:
+
+```toml
+licenseKey = "<your Interzoid license key>"
+```
 
 ## Running an example
 

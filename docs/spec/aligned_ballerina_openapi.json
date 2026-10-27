@@ -1,0 +1,154 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Interzoid Get Global Phone Number Information API",
+        "description": "This API provides geographic information for a global telephone number, including city and country information, primary languages spoken, and mobile device identification.",
+        "termsOfService": "https://www.interzoid.com/terms",
+        "contact": {
+            "name": "API Support",
+            "url": "https://www.interzoid.com",
+            "email": "support@interzoid.com"
+        },
+        "license": {
+            "name": "Interzoid license",
+            "url": "https://www.interzoid.com/license"
+        },
+        "version": "1.0.0"
+    },
+    "externalDocs": {
+        "description": "API home page and documentation",
+        "url": "https://www.interzoid.com/services/getglobalnumberinfo"
+    },
+    "servers": [
+        {
+            "url": "https://api.interzoid.com"
+        }
+    ],
+    "security": [
+        {
+            "licenseKey": []
+        }
+    ],
+    "paths": {
+        "/getglobalnumberinfo": {
+            "get": {
+                "tags": [
+                    "Global Phone Number Information"
+                ],
+                "summary": "Get demographic information for a global telephone number",
+                "description": "Get demographic information for a global telephone number, including city and country information, primary languages spoken, and mobile device identification.\n",
+                "operationId": "getGlobalNumberInfo",
+                "parameters": [
+                    {
+                        "name": "intlnumber",
+                        "in": "query",
+                        "description": "International number (with country code) to retrieve information for",
+                        "required": true,
+                        "style": "form",
+                        "explode": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Global telephone demographic information",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GlobalNumberInfo"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request - insufficient parameters"
+                    },
+                    "402": {
+                        "description": "credits exhausted"
+                    },
+                    "403": {
+                        "description": "invalid license API key"
+                    },
+                    "404": {
+                        "description": "telephone number not found"
+                    },
+                    "405": {
+                        "description": "method not allowed"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "GlobalNumberInfo": {
+                "type": "object",
+                "properties": {
+                    "Credits": {
+                        "type": "string",
+                        "description": "Remaining API credits for the license key",
+                        "x-ballerina-name": "credits"
+                    },
+                    "PrimaryCity": {
+                        "type": "string",
+                        "description": "Primary city associated with the telephone number",
+                        "x-ballerina-name": "primaryCity"
+                    },
+                    "Country": {
+                        "type": "string",
+                        "description": "Country the telephone number belongs to",
+                        "x-ballerina-name": "country"
+                    },
+                    "Region": {
+                        "type": "string",
+                        "description": "Region or state associated with the telephone number",
+                        "x-ballerina-name": "region"
+                    },
+                    "Language3": {
+                        "type": "string",
+                        "description": "Third most common language spoken in the area",
+                        "x-ballerina-name": "language3"
+                    },
+                    "Language2": {
+                        "type": "string",
+                        "description": "Second most common language spoken in the area",
+                        "x-ballerina-name": "language2"
+                    },
+                    "PrimaryLanguage": {
+                        "type": "string",
+                        "description": "Primary language spoken in the area",
+                        "x-ballerina-name": "primaryLanguage"
+                    },
+                    "Mobile": {
+                        "type": "string",
+                        "description": "Indicates whether the number is a mobile device number",
+                        "x-ballerina-name": "mobile"
+                    },
+                    "Code": {
+                        "type": "string",
+                        "description": "Status code of the API response",
+                        "x-ballerina-name": "code"
+                    },
+                    "Wealth": {
+                        "type": "string",
+                        "description": "Wealth indicator for the country of the number",
+                        "x-ballerina-name": "wealth"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "licenseKey": {
+                "type": "apiKey",
+                "description": "Your Interzoid license API key. Register at www.interzoid.com/register",
+                "name": "license",
+                "in": "query"
+            }
+        }
+    }
+}
