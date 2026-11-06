@@ -1,0 +1,137 @@
+{
+    "openapi": "3.0.0",
+    "servers": [
+        {
+            "url": "https://api.interzoid.com"
+        }
+    ],
+    "info": {
+        "version": "1.0.0",
+        "title": "Interzoid Get Global Phone Number Information API",
+        "description": "This API provides geographic information for a global telephone number, including city and country information, primary languages spoken, and mobile device identification.",
+        "contact": {
+            "name": "API Support",
+            "email": "support@interzoid.com",
+            "url": "https://www.interzoid.com"
+        },
+        "termsOfService": "https://www.interzoid.com/terms",
+        "license": {
+            "name": "Interzoid license",
+            "url": "https://www.interzoid.com/license"
+        }
+    },
+    "externalDocs": {
+        "description": "API home page and documentation",
+        "url": "https://www.interzoid.com/services/getglobalnumberinfo"
+    },
+    "security": [
+        {
+            "licenseKey": []
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "licenseKey": {
+                "type": "apiKey",
+                "in": "query",
+                "name": "license",
+                "description": "Your Interzoid license API key. Register at www.interzoid.com/register"
+            }
+        }
+    },
+    "paths": {
+        "/getglobalnumberinfo": {
+            "get": {
+                "tags": [
+                    "Global Phone Number Information"
+                ],
+                "summary": "Get demographic information for a global telephone number",
+                "operationId": "getglobalnumberinfo",
+                "description": "Get demographic information for a global telephone number, including city and country information, primary languages spoken, and mobile device identification.\n",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "intlnumber",
+                        "description": "International number (with country code) to retrieve information for",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Global telephone demographic information",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "Country": {
+                                            "type": "string",
+                                            "description": "Country the telephone number belongs to"
+                                        },
+                                        "Region": {
+                                            "type": "string",
+                                            "description": "Region or state associated with the telephone number"
+                                        },
+                                        "PrimaryCity": {
+                                            "type": "string",
+                                            "description": "Primary city associated with the telephone number"
+                                        },
+                                        "PrimaryLanguage": {
+                                            "type": "string",
+                                            "description": "Primary language spoken in the area"
+                                        },
+                                        "Language2": {
+                                            "type": "string",
+                                            "description": "Second most common language spoken in the area"
+                                        },
+                                        "Language3": {
+                                            "type": "string",
+                                            "description": "Third most common language spoken in the area"
+                                        },
+                                        "Mobile": {
+                                            "type": "string",
+                                            "description": "Indicates whether the number is a mobile device number"
+                                        },
+                                        "Wealth": {
+                                            "type": "string",
+                                            "description": "Wealth indicator for the country of the number"
+                                        },
+                                        "Code": {
+                                            "type": "string",
+                                            "description": "Status code of the API response"
+                                        },
+                                        "Credits": {
+                                            "type": "string",
+                                            "description": "Remaining API credits for the license key"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request - insufficient parameters"
+                    },
+                    "402": {
+                        "description": "credits exhausted"
+                    },
+                    "403": {
+                        "description": "invalid license API key"
+                    },
+                    "404": {
+                        "description": "telephone number not found"
+                    },
+                    "405": {
+                        "description": "method not allowed"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        }
+    }
+}
